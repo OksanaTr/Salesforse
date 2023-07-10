@@ -18,13 +18,17 @@ public class LoginPageFactory extends BasePage{
     public LoginPageFactory(WebDriver driver) {
         super(driver);
     }
+
+    @Override
+    public boolean isPageOpen() {
+        return false;
+    }
+
     public void authorization(String userName, String password){
         userLoginInput.sendKeys(userName);
         passwordInput.sendKeys(password);
         LoginButton.click();
     }
-    @Override
-    public void waitForPageLoaded() {
 
     }
-}
+

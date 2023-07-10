@@ -9,6 +9,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import page.AccountListPage;
+import page.AccountModalPage;
 import page.HomePage;
 import page.LoginPage;
 
@@ -20,10 +22,13 @@ public class BaseTest {
     protected WebDriver driver;
     protected LoginPage loginPage;
     protected HomePage homePage;
+    AccountTest accountTest;
+    public AccountListPage accountListPage;
+    AccountModalPage accountModalPage;
 
 
     @BeforeMethod
-    public void setUp(ITestContext testContext) throws Exception {
+    public void setUp() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
@@ -32,12 +37,11 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver) {
-            @Override
-            public void waitForPageLoaded() {
+        homePage = new HomePage(driver);
+        accountListPage = new AccountListPage(driver);
+        accountModalPage = new AccountModalPage(driver);
+    }
 
-            }
-        };}
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {

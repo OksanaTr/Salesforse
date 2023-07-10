@@ -11,44 +11,22 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BasePage {
-    static WebDriver driver;
+    WebDriver driver;
     WebDriverWait wait;
     public static final String BASE_URL = "https://trusova6.my.salesforce.com/";
-    public BasePage(WebDriver driver) {
+    public static final By NEW_BUTTON = By.xpath("//div[@title='New']");
+    public BasePage(WebDriver driver){
         this.driver = driver;
-        wait = new WebDriverWait(driver, 15);
+        wait = new WebDriverWait(driver,20);
     }
 
-    public abstract void waitForPageLoaded();
+    public abstract boolean isPageOpen();
 
-    public String getCurrentUrl() { //проверка страницы на соответствие
-        return driver.getCurrentUrl();
+    public boolean isExist(By locator){
+        try
+        {return driver.findElement(locator).isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
     }
-
-
-    public boolean isElementPresent(By locator) {
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        boolean isPresent = !driver.findElements(locator).isEmpty();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        return isPresent;
-    }
-
-    public void waitForElementDisplayed(By locator){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
-    public void waitForElementClickable(By locator){
-
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
-    }
-public boolean isExist(By locator){
-        try {
-            return driver.findElement(locator).isDisplayed();
-
-
-        }catch (NoSuchElementException ex){
-             System.out.println(""+ ex.getMessage());
-             return false;
-            }
-}
-
 }

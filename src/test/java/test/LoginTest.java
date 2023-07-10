@@ -10,11 +10,15 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void  loginTestWithValidData(){
+        boolean isHomePageOpen = loginPage.openLoginPage()
+            .enterData("museahe-g0nb@force.com","A258456a")
+            .clickLoginButton()
+                    .isPageOpen();
 
-            loginPage.openLoginPage();
-            loginPage.loginAndPassword("museahe-g0nb@force.com","A258456a");
-            loginPage.clickLogInButton();
-            assertTrue(homePage.titleIsVisible());
+
+            assertTrue(isHomePageOpen);
         }
 }
+
+
   
