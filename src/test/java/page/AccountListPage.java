@@ -24,4 +24,9 @@ public class AccountListPage extends BasePage{
         return this;
     }
 
-}
+    public AccountListPage open() {
+        driver.get(BASE_URL + "lightning/o/Account/list");
+        return this;
+    }
+
+   }

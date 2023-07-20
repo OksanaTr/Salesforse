@@ -1,10 +1,10 @@
-package test;
+package test.base;
 
+public class Listener implements iTestResult {
 
-import test.base.BaseTest;
-
-public class LoginTest extends BaseTest {
-
+    public Listener() {
+        super();
+    }
 
     @Override
     public int hashCode() {
@@ -30,22 +30,4 @@ public class LoginTest extends BaseTest {
     protected void finalize() throws Throwable {
         super.finalize();
     }
-
-    @Test
-    public void  loginTestWithValidData(){
-        boolean isHomePageOpen = loginPage.open()
-            .enterData("museahe-g0nb@force.com","A258456a")
-            .clickLoginButton()
-                    .isPageOpen();
-
-
-            assertequals(homePage.isPageOpen());
-        }
-
-    private void assertequals(boolean pageOpen) {
-
-    }
 }
-
-
-  
